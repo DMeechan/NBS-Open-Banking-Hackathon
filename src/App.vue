@@ -3,7 +3,7 @@
   <div id="app">
     <nav>
       <div class="nav-wrapper blue">
-        <a href="#!" class="brand-logo center-align" style="font-size:20px">OB1-NEM-OB</a>
+        <a href="#!" class="brand-logo center" style="font-size:20px">OB1-NEM-OB</a>
         <a href="#" data-activates="mobile-nav" class="button-collapse hide-on-med-and-up"><i class="material-icons">menu</i></a>
 
         <ul class="right hide-on-small-only">
