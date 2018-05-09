@@ -2,8 +2,8 @@
 <template>
   <div id="app">
     <nav>
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo center">OB1-NEM-OB</a>
+      <div class="nav-wrapper blue">
+        <a href="#!" class="brand-logo center-align" style="font-size:20px">OB1-NEM-OB</a>
         <a href="#" data-activates="mobile-nav" class="button-collapse hide-on-med-and-up"><i class="material-icons">menu</i></a>
 
         <ul class="right hide-on-small-only">
@@ -42,7 +42,7 @@ export default {
 
     created() {
         $(document).ready(function() {
-            $(".button-collapse").sideNav();
+            $(".button-collapse").sideNav({closeOnClick: true});
         });
     },
 };
