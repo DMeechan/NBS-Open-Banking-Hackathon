@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div id="app">
       <h1>NBS Open Banking Hackathon - OB1-NEM-OB</h1>
@@ -12,8 +13,8 @@
 
 <script>
 export default {
-    name: "App",
-};
+  name: 'App'
+}
 </script>
 
 <style>
