@@ -1,0 +1,12 @@
+{
+    "name": "NBS Open Banking",
+    "short_name": "nbs-open-banking",
+    "lang": "en-GB",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "icons": [{
+        "src": "/images/nbs.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    }]
+}
