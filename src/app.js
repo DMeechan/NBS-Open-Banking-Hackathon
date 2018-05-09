@@ -13,6 +13,11 @@ const http = require("http");
 const https = require("https");
 const helmet = require("helmet");
 
+// Vue routing
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
 // Create an Express application
 const app = express();
 const port = process.env.PORT || 8001;
