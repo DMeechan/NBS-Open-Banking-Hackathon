@@ -18,6 +18,11 @@ export default new Router({
       path: '/hello',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
