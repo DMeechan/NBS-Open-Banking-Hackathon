@@ -30,7 +30,8 @@
     "https": "^1.0.0",
     "materialize-css": "^0.100.2",
     "normalize-css": "^2.3.1",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "morgan": "^1.9.0",
