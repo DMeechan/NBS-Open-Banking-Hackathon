@@ -1,0 +1,26 @@
+{
+  "name": "nbs-open-banking-hackathon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DMeechan/NBS-Open-Banking-Hackathon.git"
+  },
+  "author": "Daniel Meechan <daniel.meechan@ibm.com>",
+  "license": "MIT",
+  "description": "Nationwide Open Banking API Hackathon Team - OB1-NEM-OB",
+  "bugs": {
+    "url": "https://github.com/DMeechan/NBS-Open-Banking-Hackathon/issues"
+  },
+  "homepage": "https://github.com/DMeechan/NBS-Open-Banking-Hackathon#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node index.js",
+    "dev": "ENV=localhost nodemon --exec \"babel-node\" --ext js,vue index.js"
+  },
+  "dependencies": {
+    "materialize-css": "^0.100.2",
+    "nodemon": "^1.17.4",
+    "vue": "^2.5.16"
+  }
+}

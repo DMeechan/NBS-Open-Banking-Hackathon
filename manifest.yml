@@ -1,0 +1,9 @@
+---
+applications:
+- name:    OB-Aggregator
+  memory:  1024M
+  command: npm start
+  env:
+    ENV: cloud
+#  services:
+#    - practitioner-production-db
