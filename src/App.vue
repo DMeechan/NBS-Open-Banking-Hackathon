@@ -2,7 +2,7 @@
 <template>
   <div id="app">
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper blue">
         <a href="#!" class="brand-logo center">OB1-NEM-OB</a>
         <a href="#" data-activates="mobile-nav" class="button-collapse hide-on-med-and-up"><i class="material-icons">menu</i></a>
 
