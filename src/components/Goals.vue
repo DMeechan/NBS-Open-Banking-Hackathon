@@ -50,7 +50,10 @@
                   <br />
                   <h5>
                     <span class="green-text text-darken-3" style="margin-left: 20px;"> £{{ item.monthlySaving }} per month</span>
-                    <span class="waves-effect waves-light btn green darken-1 right"><i class="material-icons left">add</i>Add Goal</span>
+                    <span :id="item.name" class="waves-effect waves-light btn green darken-1 right" @click="addGoal">
+                      <i class="material-icons left">add</i>
+                      Add Goal
+                    </span>
                   </h5>
                 </div>
               </div>
@@ -99,10 +102,17 @@ export default {
                 },
                 {
                     name: "Plan for retirement",
-                    icon: "home",
+                    icon: "directions_walk",
                     amount: 50000,
                     date: "9 May 2038",
                     monthlySaving: 208,
+                },
+                {
+                    name: "Mortgage",
+                    icon: "home",
+                    amount: 250000,
+                    date: "9 May 2048",
+                    monthlySaving: 69,
                 },
             ],
             goals: [
@@ -148,6 +158,24 @@ export default {
             diff /= 60 * 60 * 24 * 7 * 4;
             return Math.abs(Math.round(diff));
         },
+
+        addGoal: function(event) {
+          const id = event.target.id;
+          const item = this.add.find(arrayItem => arrayItem.name === id);
+          console.log(item);
+
+          const goalItem = {
+            name: item.name,
+            amount: item.monthlySaving
+          }
+
+          this.goals.push(goalItem);
+
+          this.add = this.add.filter(element => {
+            return element.name !== id;
+          });
+
+        }
     },
 };
 </script>
