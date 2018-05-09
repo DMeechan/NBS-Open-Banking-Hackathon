@@ -1,16 +1,15 @@
-/* eslint-disable */
 <template>
-    <div>
+    <div class="container">
         <h1>{{message}}</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Home",
+    name: "Journey",
     data() {
         return {
-            message: "Welcome to NBS!",
+            message: "Welcome to your NBS journey!",
         };
     },
 };
