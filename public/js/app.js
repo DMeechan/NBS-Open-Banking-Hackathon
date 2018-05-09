@@ -1,5 +1,4 @@
-// 0. If using a module system (e.g. via vue-cli), import Vue and VueRouter
-// and then call `Vue.use(VueRouter)`.
+// import 
 
 // 1. Define route components.
 // These can be imported from other files
