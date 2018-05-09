@@ -42,7 +42,7 @@
                 </form>
               </div>
             </div>
-            <a href="#!">Create account</a>
+            <!-- <a href="#!">Create account</a> -->
           </center>
 </template>
 
