@@ -8,24 +8,30 @@
 
         <ul class="right hide-on-small-only">
           <li>
-            <router-link to="/">Home</router-link>
+            <router-link to="/dashboard">Home</router-link>
           </li>
           <li>
             <router-link to="/goals">Goals</router-link>
           </li>
           <li>
             <router-link to="/journey">Journey</router-link>
+          </li>
+          <li>
+            <router-link to="/">Login</router-link>
           </li>
         </ul>
         <ul class="side-nav" id="mobile-nav">
           <li>
-            <router-link to="/">Home</router-link>
+            <router-link to="/dashboard">Home</router-link>
           </li>
           <li>
             <router-link to="/goals">Goals</router-link>
           </li>
           <li>
             <router-link to="/journey">Journey</router-link>
+          </li>
+          <li>
+            <router-link to="/">Login</router-link>
           </li>
         </ul>
 
