@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col s12 m9">
         <h5>Add New Goals</h5>
-        <ul class="collapsible" data-collapsible="expandable" style="margin-top: 29px;">
+        <ul class="collapsible" style="margin-top: 29px;">
           <li v-for="item in add">
             <div class="collapsible-header"><i class="material-icons">{{ item.icon }}</i>{{ item.name }}</div>
             <div class="collapsible-body" style="ma">

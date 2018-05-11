@@ -19,26 +19,33 @@
     </div>
 
     <!-- Adding goals list -->
-    <div class="row">
-      <div class="col s12 m9">
-        <ul class="collapsible" data-collapsible="expandable" style="margin-top: 29px;">
-          <li v-for="account in accounts">@{{ accounts }}</li>
-            
-        </ul>
-      </div>
+    <div class="s3">
+        <div class="carousel"> 
+          <a class="carousel-item center" v-for="account in accounts" >
+             <div class="card grey lighten-3">
+              <div class="card-content activator" style="padding-bottom:200px">
+                <span class="card-title activator bold-text grey-text text-darken-4">{{account.Account.Account.SecondaryIdentification}}</i></span>
+                <span class="card-title activator grey-text text-darken-4">{{account.Account.Account.Name}}</i></span>
+                <span class="card-title activator grey-text text-darken-4">{{account.Account.Account.Name}}</i></span>
+              </div>
+              
+            </div>
 
-      <!-- Existing goals list -->
-      
+
+          </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-    name: "Goals",
+    name: "Dashboard",
     data() {
         return {
             accounts: [],
+            balances: [],
             header: "Hey, Alice!",
             subheader: "These are your accounts.  ",
             add: [
@@ -69,52 +76,86 @@ export default {
             ]
         };
     },
-
+  
   mounted() {
+       
+   
     $(document).ready(function(){
+         $('.collapsible').collapsible();
 
-      $('.collapsible').collapsible();
     });
-      $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year,
-      today: 'Today',
-      clear: 'Clear',
-      close: 'Ok',
-      closeOnSelect: true // Close upon selecting a date,
+    this.getAccounts();
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: true // Close upon selecting a date,
+    
     });
   },
-  beforeMount(){
-    this.fetchStats()
- },
 
   methods: {
-
-    fetchStats: function()
-    {
-        http.get('https://ob-api.innovationwide.co.uk/api/accounts').then(function(response){users = response.data;
-         }, function(error){
-            console.log(error.statusText);
-        });
-
-   
-    },
-
-    calculateMonthlySaving: (index) => {
-      const item = this.add[index];
-
-      const today = new Date();
-      const date = new Date(item.date);
-      console.log('date: ', date);
-      const months = this.diffMonths(today, date);
+    callback(){
+      
+      $('.carousel').carousel();
+      console.log("callback");
 
     },
+    getAccounts: function() {
 
-    diffMonths: (dt1, dt2) => {
-      let diff =(dt2.getTime() - dt1.getTime()) / 1000;
-      diff /= (60 * 60 * 24 * 7 * 4);
-      return Math.abs(Math.round(diff));
-    }
+      console.log("Test1");
+
+       
+
+
+
+      axios
+        .get("http://192.168.0.29:9001/static/accounts.json")
+        .then((response) => {
+        var accounts = [];
+        var count = 0;
+        console.log("test");
+        for(var x=0;x<50;x++) {
+          count++;
+          accounts.push(response.data.Data[x])
+          
+        }
+        this.accounts = accounts;
+        this.$nextTick(() => {
+            $('.carousel').carousel();
+            console.log("callback");
+         // Scroll Down
+          })
+        // dispatch({ 
+        //   JSON(response);
+        //   data.accounts = Data;
+        // }) //Change
+      }).catch((err) => {
+        console.log(err);
+      })
+      
+    },
+
+    getBalance: (accountid) => {
+      
+      axios
+        .get("https://ob-api.innovationwide.co.uk/api/accounts/"+accountid+"/balances")
+        .then((response) => {
+
+          return(response.data.Data[0].Balance.Amount.Amount);
+          
+        // dispatch({ 
+        //   JSON(response);
+        //   data.accounts = Data;
+        // }) //Change
+      }).catch((err) => {
+        console.log(err);
+      })
+
+    },
+
   },
 
 };
