@@ -3,8 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-var cors = require('cors')
-
 
 /* eslint-disable no-new */
 new Vue({
