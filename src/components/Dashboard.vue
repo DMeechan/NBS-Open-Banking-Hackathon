@@ -6,7 +6,7 @@
     <!-- Header -->
     <div class="row valign-wrapper">
       <div class="col s3">
-        <img class="responsive-img circle" src="http://mylowersaxony.com/magnoliaPublic/dam/jcr:abde16d8-a09d-4f19-b6b3-d48ddd80aca5/curiositytravels-profile-200px.jpg">
+        <img class="responsive-img circle z-depth-2" src="http://mylowersaxony.com/magnoliaPublic/dam/jcr:abde16d8-a09d-4f19-b6b3-d48ddd80aca5/curiositytravels-profile-200px.jpg">
       </div>
       <div class="col s9 hide-on-small-only">
         <h3>{{ header }}</h3>
@@ -21,14 +21,16 @@
     <!-- Adding goals list -->
     <div class="s3">
         <div class="carousel"> 
-          <a class="carousel-item center" v-for="account in accounts" >
+          <a class="carousel-item center" style="width:90%" v-for="account in accounts" >
              <div class="card grey lighten-3">
-              <div class="card-content activator" style="padding-bottom:200px">
-                <span class="card-title activator bold-text grey-text text-darken-4">{{account.Account.Account.SecondaryIdentification}}</i></span>
-                <span class="card-title activator grey-text text-darken-4">{{account.Account.Account.Name}}</i></span>
-                <span class="card-title activator grey-text text-darken-4">{{account.Account.Account.Name}}</i></span>
+              <div class="card-content activator" >
+                <i class="material-icons left">account_balance</i><span class="card-title activator bold-text grey-text text-darken-4">{{account.Account.Account.SecondaryIdentification}}</i></span>
+                <i class="material-icons left">contacts</i><span class="card-title activator grey-text text-darken-4">{{account.Account.Nickname}}</i></span>
+                <i class="material-icons left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.Account.Currency}}</i></span>
               </div>
-              
+              <div class="card-action">
+                <a class="waves-effect waves-light btn"><i class="material-icons left">account_balance_wallet</i>More</a>
+              </div>
             </div>
 
 
@@ -112,7 +114,7 @@ export default {
 
 
       axios
-        .get("http://192.168.0.29:9001/static/accounts.json")
+        .get("http://localhost:9001/static/accounts.json")
         .then((response) => {
         var accounts = [];
         var count = 0;

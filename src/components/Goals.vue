@@ -6,7 +6,7 @@
     <!-- Header -->
     <div class="row valign-wrapper">
       <div class="col s3">
-        <img class="responsive-img circle" src="http://mylowersaxony.com/magnoliaPublic/dam/jcr:abde16d8-a09d-4f19-b6b3-d48ddd80aca5/curiositytravels-profile-200px.jpg">
+        <img class="responsive-img circle z-depth-2" src="http://mylowersaxony.com/magnoliaPublic/dam/jcr:abde16d8-a09d-4f19-b6b3-d48ddd80aca5/curiositytravels-profile-200px.jpg">
       </div>
       <div class="col s9 hide-on-small-only">
         <h3>{{ header }}</h3>
@@ -24,7 +24,7 @@
         <h5>Add New Goals</h5>
         <ul class="collapsible" style="margin-top: 29px;">
           <li v-for="item in add">
-            <div class="collapsible-header"><i class="material-icons">{{ item.icon }}</i>{{ item.name }}</div>
+            <div class="grey lighten-3 collapsible-header"><i class="material-icons">{{ item.icon }}</i>{{ item.name }}</div>
             <div class="collapsible-body" style="ma">
               <div class="row">
                 <div class="col s12">
@@ -101,14 +101,14 @@ export default {
                     monthlySaving: 36,
                 },
                 {
-                    name: "Plan for retirement",
-                    icon: "directions_walk",
+                    name: "Plan for new car",
+                    icon: "directions_car",
                     amount: 50000,
                     date: "9 May 2038",
                     monthlySaving: 208,
                 },
                 {
-                    name: "Mortgage",
+                    name: "First home",
                     icon: "home",
                     amount: 250000,
                     date: "9 May 2048",

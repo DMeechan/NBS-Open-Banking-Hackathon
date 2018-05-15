@@ -1,7 +1,7 @@
 <template>
   <center>
     
-    <img class="responsive-img" style="width: 500px;" src="../assets/obgif.gif" />
+    <img class="responsive-img z-depth-2" style="width: 500px;" src="../assets/obgif.gif" />
     <div class="section"></div>
 
     <h5 class="indigo-text">Please, login into your account</h5>

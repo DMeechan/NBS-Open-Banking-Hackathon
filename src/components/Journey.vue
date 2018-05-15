@@ -3,7 +3,7 @@
     <!-- Header -->
         <div class="row valign-wrapper">
             <div class="col s3">
-                <img class="responsive-img circle" src="http://mylowersaxony.com/magnoliaPublic/dam/jcr:abde16d8-a09d-4f19-b6b3-d48ddd80aca5/curiositytravels-profile-200px.jpg">
+                <img class="responsive-img circle z-depth-2" src="http://mylowersaxony.com/magnoliaPublic/dam/jcr:abde16d8-a09d-4f19-b6b3-d48ddd80aca5/curiositytravels-profile-200px.jpg">
             </div>
             <div class="col s9 hide-on-small-only">
                 <h3>{{ header }}</h3>
