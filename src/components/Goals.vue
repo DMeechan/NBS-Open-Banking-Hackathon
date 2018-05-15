@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col s12 m9">
         <h5>Add New Goals</h5>
-        <ul class="collapsible" style="margin-top: 29px;">
+        <ul class="collapsible" data-collapsible="accordion" style="margin-top: 29px;">
           <li v-for="item in add">
             <div class="grey lighten-3 collapsible-header"><i class="material-icons">{{ item.icon }}</i>{{ item.name }}</div>
             <div class="collapsible-body" style="ma">
@@ -79,7 +79,7 @@
           </tr>
         </tbody>
       </table>
-      <router-link to="/journey" class="col s12 blue waves-effect waves-light btn"><i class="material-icons left">account_balance</i>VIEW MORE</router-link>
+      <router-link to="/journey" class="col s12 blue waves-effect waves-light btn"><i class="material-icons left">account_balance</i>VIEW MORE 2</router-link>
       </div>
     </div>
   </div>
