@@ -4,6 +4,7 @@ const path = require("path");
 // Middleware
 const session = require("express-session");
 const compression = require("compression");
+const cors = require("cors");
 
 // Get dependencies needed for HTTPS
 const fs = require("fs");
@@ -65,6 +66,9 @@ function setupMiddleware(hostingEnvironment) {
     // Middleware for initialising passport with sessions:
     // Parses payload bodies in requests so it is easier to work with
     app.use(express.json());
+
+    // Cors fixes the access control origin error in Chrome
+    app.use(cors());
 
 
     // Creates user session cookies that allows users to navigate between protected routes without
