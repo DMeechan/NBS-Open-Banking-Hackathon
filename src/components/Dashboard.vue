@@ -114,7 +114,7 @@ export default {
 
 
       axios
-        .get("http://localhost:9001/static/accounts.json")
+        .get("https://ob-api.innovationwide.co.uk/api/accounts/")
         .then((response) => {
         var accounts = [];
         var count = 0;
