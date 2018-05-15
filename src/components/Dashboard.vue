@@ -24,9 +24,9 @@
           <a class="carousel-item center" style="width:90%" v-for="account in accounts" >
              <div class="card grey lighten-3 activator">
               <div class="card-content activator" >
-                <i class="material-icons left">account_balance</i><span class="card-title activator bold-text grey-text text-darken-4">{{account.Account.Account.SecondaryIdentification}}</i></span>
-                <i class="material-icons left">contacts</i><span class="card-title activator grey-text text-darken-4">{{account.Account.Nickname}}</i></span>
-                <i class="material-icons left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.Account.Currency}}</i></span>
+                <i class="material-icons left">account_balance</i><span class="card-title activator bold-text grey-text text-darken-4">{{account.info.Account.Account.SecondaryIdentification}}</i></span>
+                <i class="material-icons left">contacts</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Nickname}}</i></span>
+                <i class="material-icons left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Currency}}</i></span>
               </div>
               <div class="card-action activator">
                   <a class="waves-effect waves-light btn"><i class="material-icons left">account_balance_wallet</i>More</a>
@@ -34,8 +34,8 @@
               </div>
               <div class="card-reveal">
                 <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">close</i>Balance</span>
-                  <i class="material-icons left">{{getBalance(account.Account.AccountId)}}</i>
-                  <span class="card-title activator grey-text text-darken-4">{{account.Account.Currency}}</i></span>
+                  
+                  <span class="card-title activator grey-text text-darken-4">{{account.balance}}</span>
               </div>
 
             </div>
@@ -48,125 +48,123 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-    name: "Dashboard",
-    data() {
-        return {
-            accounts: [],
-            balances: [],
-            header: "Hey, Alice!",
-            subheader: "These are your accounts.  ",
-            add: [
-              {
-                name: "Go on holiday",
-                icon: "beach_access",
-                amount: 250,
-                date: "9 May 2018",
-                monthlySaving: 0
-              },
-              {
-                name: "Plan for retirement",
-                icon: "home",
-                amount: 10000,
-                date: "9 May 2018",
-                monthlySaving: 0
-              }
-            ],
-            goals: [
-              {
-                name: "New Home",
-                amount: 250,
-              },
-              {
-                name: "Rainy day",
-                amount: 25,
-              },
-            ]
-        };
-    },
-  
-  mounted() {
-       
-   
-    $(document).ready(function(){
-         $('.collapsible').collapsible();
+  name: "Dashboard",
+  data() {
+    return {
+      accounts: [],
+      header: "Hey, Alice!",
+      subheader: "These are your accounts.  ",
+      add: [
+        {
+          name: "Go on holiday",
+          icon: "beach_access",
+          amount: 250,
+          date: "9 May 2018",
+          monthlySaving: 0
+        },
+        {
+          name: "Plan for retirement",
+          icon: "home",
+          amount: 10000,
+          date: "9 May 2018",
+          monthlySaving: 0
+        }
+      ],
+      goals: [
+        {
+          name: "New Home",
+          amount: 250
+        },
+        {
+          name: "Rainy day",
+          amount: 25
+        }
+      ]
+    };
+  },
 
+  mounted() {
+    $(document).ready(function() {
+      $(".collapsible").collapsible();
     });
+
+    $(".datepicker").pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: "Today",
+      clear: "Clear",
+      close: "Ok",
+      closeOnSelect: true // Close upon selecting a date,
+    });
+  },
+
+  created() {
     this.getAccounts();
-    $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15, // Creates a dropdown of 15 years to control year,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: true // Close upon selecting a date,
-    
-    });
   },
 
   methods: {
-    callback(){
-      
-      $('.carousel').carousel();
+    callback() {
+      $(".carousel").carousel();
       console.log("callback");
-
     },
     getAccounts: function() {
-
       console.log("Test1");
 
-       
-
-
-
       axios
-        .get("https://ob-api.innovationwide.co.uk/api/accounts")
-        .then((response) => {
-        var accounts = [];
-        var count = 0;
-        console.log("test");
-        for(var x=0;x<50;x++) {
-          count++;
-          accounts.push(response.data.Data[x])
-          
-        }
-        this.accounts = accounts;
-        this.$nextTick(() => {
-            $('.carousel').carousel();
-            console.log("callback");
-         // Scroll Down
-          })
-        // dispatch({ 
-        //   JSON(response);
-        //   data.accounts = Data;
-        // }) //Change
-      }).catch((err) => {
-        console.log(err);
-      })
-      
-    },
+        .get("/api/accounts#/")
+        .then(response => {
+          var count = 0;
+          console.log("test");
+          for (var x = 0; x < 50; x++) {
+            count++;
 
-    getBalance: (accountid) => {
-      
+            const info = response.data.Data[x];
+            const balance = this.getBalance(info.Account.AccountId);
+            const item = {
+              info,
+              balance
+            };
+            this.accounts.push(item);
+          }
+          setTimeout(function(){
+              
+              $(".carousel").carousel();
+              console.log("callback");
+              
+
+          }, 5000)
+
+          
+          // dispatch({
+          //   JSON(response);
+          //   data.accounts = Data;
+          // }) //Change
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    
+    getBalance: accountid => {
       axios
-        .get("https://ob-api.innovationwide.co.uk/api/accounts/"+accountid+"/balances")
-        .then((response) => {
+        .get("/api/accounts/balances/" + accountid)
+        .then(response => {
+          const data = response.data.Data[0].Balance.Amount.Amount;
+          console.log(data);
+          return data;
 
-          return(response.data.Data[0].Balance.Amount.Amount);
-          
-        // dispatch({ 
-        //   JSON(response);
-        //   data.accounts = Data;
-        // }) //Change
-      }).catch((err) => {
-        console.log(err);
-      })
-
-    },
-
-  },
-
+          // dispatch({
+          //   JSON(response);
+          //   data.accounts = Data;
+          // }) //Change
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
 };
 </script>
 

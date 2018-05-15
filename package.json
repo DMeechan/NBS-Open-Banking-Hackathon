@@ -26,6 +26,7 @@
         "express-session": "1.15.4",
         "helmet": "^3.11.0",
         "https": "^1.0.0",
+        "request": "^2.86.0",
         "vue": "^2.5.2",
         "vue-router": "^3.0.1"
     },

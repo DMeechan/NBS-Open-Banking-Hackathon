@@ -11,6 +11,7 @@ const fs = require("fs");
 const http = require("http");
 const https = require("https");
 const helmet = require("helmet");
+const request = require("request");
 
 // Create an Express application
 const app = express();
@@ -26,8 +27,18 @@ app.get("/health-check", (req, res) =>
 const accountsUrl = "https://ob-api.innovationwide.co.uk/api/accounts/";
 
 app.get("/api/accounts", (req, res) => {
-    http.get(accountsUrl, (res) => {
-        res.status(200).send(res);
+    request(accountsUrl, function (error, code, body) {
+        if (error) res.status(400).send(error);
+        res.status(200).send(body);
+    });
+});
+
+app.get("/api/accounts/balances/:account", (req, res) => {
+    const account = req.params.account;
+    console.log('account', account);
+    request(accountsUrl + account + "/balances", function (error, code, body) {
+        if (error) res.status(400).send(error);
+        res.status(200).send(body);
     });
 });
 
@@ -83,7 +94,7 @@ function setupMiddleware(hostingEnvironment) {
         next();
       });
 
-      app.use(allowCrossDomain);
+    //   app.use(allowCrossDomain);
     // Creates user session cookies that allows users to navigate between protected routes without
     // having to log in every time
     app.use(
