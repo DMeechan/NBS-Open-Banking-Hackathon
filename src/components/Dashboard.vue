@@ -22,15 +22,22 @@
     <div class="s3">
         <div class="carousel"> 
           <a class="carousel-item center" style="width:90%" v-for="account in accounts" >
-             <div class="card grey lighten-3">
+             <div class="card grey lighten-3 activator">
               <div class="card-content activator" >
                 <i class="material-icons left">account_balance</i><span class="card-title activator bold-text grey-text text-darken-4">{{account.Account.Account.SecondaryIdentification}}</i></span>
                 <i class="material-icons left">contacts</i><span class="card-title activator grey-text text-darken-4">{{account.Account.Nickname}}</i></span>
                 <i class="material-icons left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.Account.Currency}}</i></span>
               </div>
-              <div class="card-action">
-                <a class="waves-effect waves-light btn"><i class="material-icons left">account_balance_wallet</i>More</a>
+              <div class="card-action activator">
+                  <a class="waves-effect waves-light btn"><i class="material-icons left">account_balance_wallet</i>More</a>
+                
               </div>
+              <div class="card-reveal">
+                <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">close</i>Balance</span>
+                  <i class="material-icons left">{{getBalance(account.Account.AccountId)}}</i>
+                  <span class="card-title activator grey-text text-darken-4">{{account.Account.Currency}}</i></span>
+              </div>
+
             </div>
 
 
@@ -114,7 +121,7 @@ export default {
 
 
       axios
-        .get("https://ob-api.innovationwide.co.uk/api/accounts/")
+        .get("https://ob-api.innovationwide.co.uk/api/accounts")
         .then((response) => {
         var accounts = [];
         var count = 0;
