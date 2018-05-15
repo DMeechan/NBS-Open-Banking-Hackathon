@@ -79,7 +79,7 @@
           </tr>
         </tbody>
       </table>
-      <router-link to="/journey" class="col s12 blue waves-effect waves-light btn"><i class="material-icons left">account_balance</i>VIEW MORE</router-link>
+      <router-link to="/journey" class="col s12 blue waves-effect waves-light btn"><i class="material-icons left">account_balance</i>VIEW MORE 2</router-link>
       </div>
     </div>
   </div>
