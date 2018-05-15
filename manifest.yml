@@ -2,7 +2,7 @@
 applications:
 - name:    OB-Aggregator
   memory:  1024M
-  command: npm prod
+  command: npm start
   env:
     ENV: cloud
 #  services:
