@@ -88,6 +88,7 @@ function setupMiddleware(hostingEnvironment) {
 
     // Parses requests cookies. This is needed to get the user session cookie
     app.use(cookieParser());
+    app.use(allowCrossDomain);
 
     // Creates user session cookies that allows users to navigate between protected routes without
     // having to log in every time

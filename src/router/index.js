@@ -9,6 +9,7 @@ import Journey from '@/components/Journey'
 Vue.use(Router)
 
 export default new Router({
+  
   routes: [
     {
       path: '/',

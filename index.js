@@ -23,6 +23,14 @@ app.get("/health-check", (req, res) =>
     res.status(200).send("200: Server is healthy!"),
 );
 
+const accountsUrl = "https://ob-api.innovationwide.co.uk/api/accounts/";
+
+app.get("/api/accounts", (req, res) => {
+    http.get(accountsUrl, (res) => {
+        res.status(200).send(res);
+    });
+});
+
 setupMiddleware(hostingEnvironment);
 const router = setupRoutes(app);
 
@@ -69,8 +77,13 @@ function setupMiddleware(hostingEnvironment) {
 
     // Cors fixes the access control origin error in Chrome
     app.use(cors());
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+      });
 
-
+      app.use(allowCrossDomain);
     // Creates user session cookies that allows users to navigate between protected routes without
     // having to log in every time
     app.use(
