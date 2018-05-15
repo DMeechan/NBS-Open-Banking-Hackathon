@@ -14,7 +14,7 @@
         "start": "npm run dev",
         "lint": "eslint --ext .js,.vue src",
         "build": "node build/build.js",
-        "prod": "ENV=cloud babel-node ./index.js"
+        "prod": "node build/build.js && ENV=cloud babel-node ./index.js"
     },
     "dependencies": {
         "express": "^4.16.3",

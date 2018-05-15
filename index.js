@@ -15,7 +15,7 @@ const helmet = require("helmet");
 const app = express();
 const port = process.env.PORT || 8001;
 
-const hostingEnvironment = process.env.ENV || "localhost";
+const hostingEnvironment = process.env.ENV || "cloud";
 console.log("Running on hosting environment: " + hostingEnvironment);
 
 app.get("/health-check", (req, res) =>
