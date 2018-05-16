@@ -24,39 +24,42 @@ app.get("/health-check", (req, res) =>
     res.status(200).send("200: Server is healthy!"),
 );
 
-const accountsUrl = "https://ob-api.innovationwide.co.uk/api/accounts/";
-
-app.get("/api/accounts", (req, res) => {
-    request(accountsUrl, function (error, code, body) {
-        if (error) res.status(400).send(error);
-        res.status(200).send(body);
-    });
-});
-
-app.get("/api/accounts/balances/:account", (req, res) => {
-    const account = req.params.account;
-    console.log('account', account);
-    request(accountsUrl + account + "/balances", function (error, code, body) {
-        if (error) res.status(400).send(error);
-        res.status(200).send(body);
-    });
-});
-
 setupMiddleware(hostingEnvironment);
-const router = setupRoutes(app);
+if (hostingEnvironment === "cloud") setStaticRoutes(app);
+setApiRoutes(app);
 
 // If running locally, use HTTPS. If running on Bluemix, use HTTP (because Bluemix uses its own HTTPS certificate)
-hostingEnvironment === "localhost" ? runHTTPS() : runHTTP();
+hostingEnvironment === "dev" ? runHTTPS() : runHTTP();
 
-function setupRoutes(app) {
+function setStaticRoutes(app) {
     app.use("/", express.static(path.resolve(__dirname, "./dist")));
 }
 
+function setApiRoutes(app) {
+    const accountsUrl = "https://ob-api.innovationwide.co.uk/api/accounts/";
+
+    app.get("/api/accounts", (req, res) => {
+        request(accountsUrl, function(error, code, body) {
+            if (error) res.status(400).send(error);
+            res.status(200).send(body);
+        });
+    });
+
+    app.get("/api/accounts/balances/:account", (req, res) => {
+        const account = req.params.account;
+        console.log('account', account);
+        request(accountsUrl + account + "/balances", function(error, code, body) {
+            if (error) res.status(400).send(error);
+            res.status(200).send(body);
+        });
+    });
+}
+
 function setupMiddleware(hostingEnvironment) {
-    if (hostingEnvironment === "localhost") {
-        const morgan = require("morgan");
-        app.use(morgan("dev"));
-    }
+    // if (hostingEnvironment === "dev") {
+    //     const morgan = require("morgan");
+    //     app.use(morgan("dev"));
+    // }
 
     // Use Helmet for increased HTTPS security
     // And to remove client-side caching so any JS changes are propagated instantly
@@ -92,7 +95,7 @@ function setupMiddleware(hostingEnvironment) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
-      });
+    });
 
     //   app.use(allowCrossDomain);
     // Creates user session cookies that allows users to navigate between protected routes without
