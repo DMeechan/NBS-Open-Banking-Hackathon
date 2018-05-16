@@ -161,7 +161,7 @@ export default {
       for (let x = 0; x < 3; x++) {
         self.items[x].percentage = String(numbers[x]);
       }
-    }, 500);
+    }, 400);
     $(document).ready(function() {
       $(".collapsible").collapsible();
       $(".carousel.carousel-slider").carousel({ fullWidth: true });

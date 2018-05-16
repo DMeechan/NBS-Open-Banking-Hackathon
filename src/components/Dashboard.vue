@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row" />
     <div class="row" />
-
+    
     <!-- Header -->
     <div class="row valign-wrapper">
       <div class="col s3">
@@ -18,6 +18,7 @@
       </div>
     </div>
 
+    
     <!-- Adding goals list -->
     <div class="s3 center">
         <div  id="loader" style="padding-top:200px" >
@@ -33,37 +34,47 @@
             </div>
           </div>
         </div>
-        <div class="carousel hidden"> 
-          <a class="carousel-item center" style="width:90%" v-for="account in accounts" >
-             <div class="card grey lighten-3 activator">
-              <div class="card-content activator" >
-                <i class="material-icons left">account_balance</i><span class="card-title activator bold-text grey-text text-darken-4">{{account.info.Account.Account.SecondaryIdentification}}</i></span>
-                <i class="material-icons left">contacts</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Nickname}}</i></span>
-                <i class="material-icons left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Currency}}</i></span>
+     
+
+        <div id="stag-list" style="visibility:hidden" class="center"> 
+       
+          <div class="list-item" style="width:100%" v-for="account in accounts" >
+              
+             <div class="center card grey lighten-3" style="width:100%">
+              <div class="card-content activator"  style="padding-top:10px;padding-bottom:5px">
+                <i class="material-icons  left">account_balance</i><span class="card-title activator bold-text grey-text text-darken-4">{{account.info.Account.Account.SecondaryIdentification}}</span>
+                <i class="material-icons  left">contacts</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Nickname}}</span>
+                <i class="material-icons  left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Currency}}</span>
               </div>
-              <div class="card-action activator">
-                  <a class="waves-effect waves-light btn blue"><i class="material-icons left">account_balance_wallet</i>More</a>
-                
+              <!-- <div class="card-action activator"> -->
+                <!-- <div class="divider">
               </div>
+              <a class="card-action waves-effect waves-light btn blue activator" style="padding:0px;padding-left:8px;padding-right:8px;margin-bottom:10px;margin-top:10px"><i class="material-icons left">account_balance_wallet</i>More</a>
+                 -->
               <div class="card-reveal">
-                <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">close</i>Balance</span>
-                  
-                  <span class="card-title activator grey-text text-darken-4">{{account.balance}}</span>
+                <span class="card-title center-align grey-text text-darken-4" style="padding-left:25px;padding-bottom:6px"><i class="material-icons right">close</i>Balance</span>
+                  <div class="divider"></div>
+                  <span class="card-title grey-text text-darken-4" style="padding-top:6px">£{{account.balance}}</span>
               </div>
 
             </div>
 
 
-          </a>
+          </div>
       </div>
     </div>
   </div>
+
+  
 </template>
 
+ 
 <script>
 import axios from "axios";
 export default {
   name: "Dashboard",
+
+  
   data() {
     return {
       accounts: [],
@@ -126,28 +137,33 @@ export default {
       console.log("Test1");
 
       axios
-        .get("/api/accounts#/")
+        .get("https://localhost:8001/api/accounts/")
         .then(response => {
           var count = 0;
+          const thistemp = this;
+          const tempaccounts=[];
           for (var x = 0; x < 10; x++) {
-            
-
             const info = response.data.Data[x];
-            this.getBalance(info.Account.AccountId, info,count);
-            const balance = 0
+            this.getBalance(info.Account.AccountId, info, count);
+            const balance = 0;
             const item = {
               info,
               balance
             };
-            this.accounts.push(item);
+            tempaccounts.push(item);
             count++;
           }
           setTimeout(function() {
-            $(".carousel").carousel();
-            $(".carousel").carousel('set', 0);
             document.getElementById("loader").style.display = "none";
+
+            document.getElementById("stag-list").style.visibility = "visible";
             console.log("hide");
-          }, 1000);
+            
+            tempaccounts.forEach(element => {
+              console.log(element);
+              thistemp.accounts.push(element);
+            });
+          }, 400);
 
           // dispatch({
           //   JSON(response);
@@ -158,20 +174,18 @@ export default {
           console.log(err);
         });
     },
-
-    getBalance: function (accountid, info,count) {
+    getBalance: function(accountid, info, count) {
       axios
-        .get("/api/accounts/balances/" + accountid)
+        .get("https://localhost:8001/api/accounts/balances/" + accountid)
         .then(response => {
           const balance = response.data.Data[0].Balance.Amount.Amount;
-          
+
           // dispatch({
           //   JSON(response);
           //   data.accounts = Data;
           // }) //Change
           console.log(balance);
           this.accounts[count].balance = balance;
-
         })
         .catch(err => {
           console.log(err);

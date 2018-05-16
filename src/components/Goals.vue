@@ -48,11 +48,11 @@
                 <div class="col s12">
                   <p style="font-size:18px;margin-bottom:0px">To reach this goal, you'll need to save:</p>
                   <br />
-                  <h5>
+                  <h5 class="center">
                     <div class="divider" style="margin-bottom:20px;margin-top:0px"></div>
-                    <span class="blue-text text-darken-3" style="margin-left: 20px;"> £{{ item.monthlySaving }} per month</span>
-                    <span :id="item.name" class="waves-effect waves-light btn blue darken-1 right" @click="addGoal">
-                      <i class="material-icons white-text left">add</i>
+                    <span class="blue-text text-darken-3" > £{{ item.monthlySaving }} per month</span>
+                    <span :id="item.name" class="waves-effect waves-light btn blue darken-1" style="margin-top:10px;padding-bottom:45px" @click="addGoal">
+                      <i class="material-icons white-text " >add</i>
                       Add Goal
                     </span>
                   </h5>
@@ -80,7 +80,7 @@
           </tr>
         </tbody>
       </table>
-      <router-link to="/journey" class="col s12 blue waves-effect waves-light btn"><i class="material-icons left">account_balance</i>VIEW MORE 2</router-link>
+      <router-link to="/journey" class="col s12 blue waves-effect waves-light btn"><i class="material-icons left">card_travel</i>VIEW JOURNEY</router-link>
       </div>
     </div>
   </div>
