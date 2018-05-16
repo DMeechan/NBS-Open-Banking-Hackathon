@@ -137,7 +137,7 @@ export default {
       console.log("Test1");
 
       axios
-        .get("https://localhost:8001/api/accounts/")
+        .get("/api/accounts/")
         .then(response => {
           var count = 0;
           const thistemp = this;
@@ -176,7 +176,7 @@ export default {
     },
     getBalance: function(accountid, info, count) {
       axios
-        .get("https://localhost:8001/api/accounts/balances/" + accountid)
+        .get("/api/accounts/balances/" + accountid)
         .then(response => {
           const balance = response.data.Data[0].Balance.Amount.Amount;
 
