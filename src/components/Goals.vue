@@ -24,8 +24,8 @@
         <h5>Add New Goals</h5>
         <ul class="collapsible" data-collapsible="accordion" style="margin-top: 29px;">
           <li v-for="item in add">
-            <div class="grey lighten-3 collapsible-header"><i class="material-icons">{{ item.icon }}</i>{{ item.name }}</div>
-            <div class="collapsible-body" style="ma">
+            <div class="grey lighten-5 collapsible-header"><i class="material-icons">{{ item.icon }}</i>{{ item.name }}</div>
+            <div class="collapsible-body" style="padding-bottom:0px">
               <div class="row">
                 <div class="col s12">
                   I want to save a total of £
@@ -46,12 +46,13 @@
               </div>
               <div class="row">
                 <div class="col s12">
-                  <h5>To reach this goal, you'll need to save:</h5>
+                  <p style="font-size:18px;margin-bottom:0px">To reach this goal, you'll need to save:</p>
                   <br />
                   <h5>
-                    <span class="green-text text-darken-3" style="margin-left: 20px;"> £{{ item.monthlySaving }} per month</span>
-                    <span :id="item.name" class="waves-effect waves-light btn green darken-1 right" @click="addGoal">
-                      <i class="material-icons left">add</i>
+                    <div class="divider" style="margin-bottom:20px;margin-top:0px"></div>
+                    <span class="blue-text text-darken-3" style="margin-left: 20px;"> £{{ item.monthlySaving }} per month</span>
+                    <span :id="item.name" class="waves-effect waves-light btn blue darken-1 right" @click="addGoal">
+                      <i class="material-icons white-text left">add</i>
                       Add Goal
                     </span>
                   </h5>

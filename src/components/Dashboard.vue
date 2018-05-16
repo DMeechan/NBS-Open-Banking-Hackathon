@@ -19,8 +19,21 @@
     </div>
 
     <!-- Adding goals list -->
-    <div class="s3">
-        <div class="carousel"> 
+    <div class="s3 center">
+        <div  id="loader" style="padding-top:200px" >
+          <div class="preloader-wrapper row big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel hidden"> 
           <a class="carousel-item center" style="width:90%" v-for="account in accounts" >
              <div class="card grey lighten-3 activator">
               <div class="card-content activator" >
@@ -29,7 +42,7 @@
                 <i class="material-icons left">account_balance_wallet</i><span class="card-title activator grey-text text-darken-4">{{account.info.Account.Currency}}</i></span>
               </div>
               <div class="card-action activator">
-                  <a class="waves-effect waves-light btn"><i class="material-icons left">account_balance_wallet</i>More</a>
+                  <a class="waves-effect waves-light btn blue"><i class="material-icons left">account_balance_wallet</i>More</a>
                 
               </div>
               <div class="card-reveal">
@@ -116,27 +129,26 @@ export default {
         .get("/api/accounts#/")
         .then(response => {
           var count = 0;
-          console.log("test");
-          for (var x = 0; x < 50; x++) {
-            count++;
+          for (var x = 0; x < 10; x++) {
+            
 
             const info = response.data.Data[x];
-            const balance = this.getBalance(info.Account.AccountId);
+            this.getBalance(info.Account.AccountId, info,count);
+            const balance = 0
             const item = {
               info,
               balance
             };
             this.accounts.push(item);
+            count++;
           }
-          setTimeout(function(){
-              
-              $(".carousel").carousel();
-              console.log("callback");
-              
+          setTimeout(function() {
+            $(".carousel").carousel();
+            $(".carousel").carousel('set', 0);
+            document.getElementById("loader").style.display = "none";
+            console.log("hide");
+          }, 1000);
 
-          }, 5000)
-
-          
           // dispatch({
           //   JSON(response);
           //   data.accounts = Data;
@@ -146,19 +158,20 @@ export default {
           console.log(err);
         });
     },
-    
-    getBalance: accountid => {
+
+    getBalance: function (accountid, info,count) {
       axios
         .get("/api/accounts/balances/" + accountid)
         .then(response => {
-          const data = response.data.Data[0].Balance.Amount.Amount;
-          console.log(data);
-          return data;
-
+          const balance = response.data.Data[0].Balance.Amount.Amount;
+          
           // dispatch({
           //   JSON(response);
           //   data.accounts = Data;
           // }) //Change
+          console.log(balance);
+          this.accounts[count].balance = balance;
+
         })
         .catch(err => {
           console.log(err);

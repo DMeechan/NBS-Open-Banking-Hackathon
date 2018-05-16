@@ -36,7 +36,7 @@
           <br />
           <center>
             <div class='row'>
-              <router-link to="/goals" class="col s12 btn btn-large waves-effect indigo">Login</router-link>
+              <router-link to="/dashboard" class="col s12 btn btn-large waves-effect indigo">Login</router-link>
             </div>
           </center>
         </div>
